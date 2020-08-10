@@ -31,16 +31,15 @@ while True:
 
     filenameString = client.recv(1024).decode('utf-8')
 
-    filenames = filenameString.split(',')
+    filenames = filenameString.split(', ')
 
     for fileName in filenames:
         try:
-            
             file = open('./arquivos/{}'.format(fileName), 'r')
 
             toSendFile = file.read()
 
-            print('Página encontrada')
+            print('Página encontrada: [{}]'.format(fileName))
 
             # Seta o status no header para 200
             responseHeader = "HTTP/1.1 200 OK\r\n"
@@ -54,12 +53,10 @@ while True:
             # Envia página requisitada para o client
             for i in range(0,len(toSendFile)):
                 client.send(toSendFile[i].encode('utf-8'))
-
-            # Fecha a conexão com o client
-            client.close()
+                client.send('\n'.encode('utf-8'))
         
         except IOError as err:
-            print("Arquivo não encontrado")
+            print("Arquivo não encontrado: [{}]".format(fileName))
             print(err)
 
             # Seta no header o status de erro para o client
@@ -76,6 +73,6 @@ while True:
             # Envia página de erro para o client
             for i in range(0,len(responseError)):
                 client.send(responseError[i].encode('utf-8'))
-            
-            # Fecha a conexão
-            client.close()
+                client.send('\n'.encode('utf-8'))
+    # Fecha a conexão com o client
+    client.close()
