@@ -7,11 +7,21 @@ port = 8080
 # Conecta ao socket servidor
 skt.connect(('127.0.0.1',port))
 
-skt.send('main.html'.encode('utf-8'))
+filenameString = 'dbshjabdhjsbaj.txt, main.html, teste.html'
 
-#socket irá ler até 1024 bytes
-print(skt.recv(2048).decode('utf-8'))
+skt.send(filenameString.encode('utf-8'))
 
-print(skt.recv(2048).decode('utf-8'))
+filenameArray = filenameString.split(', ')
+
+for i in filenameArray:
+    # socket irá ler até 2048 bytes de Header
+    print(skt.recv(2048).decode('utf-8'))
+
+    # socket irá ler até 2048 bytes de conteúdo
+    print(skt.recv(2048).decode('utf-8'))
+
+    # quebra de linha
+    print(skt.recv(2048).decode('utf-8'))
+
 
 skt.close()
