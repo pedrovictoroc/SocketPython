@@ -7,7 +7,7 @@ port = 8080
 # Conecta ao socket servidor
 skt.connect(('127.0.0.1',port))
 
-filenameString = 'dbshjabdhjsbaj.txt, main.html, teste.html'
+filenameString = 'main.html, dkjbsnhjabdhjsbadhjsa.html, teste.html'
 
 skt.send(filenameString.encode('utf-8'))
 

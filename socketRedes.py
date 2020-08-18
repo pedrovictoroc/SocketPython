@@ -53,7 +53,7 @@ while True:
             # Envia página requisitada para o client
             for i in range(0,len(toSendFile)):
                 client.send(toSendFile[i].encode('utf-8'))
-                client.send('\n'.encode('utf-8'))
+            client.send('\n'.encode('utf-8'))
         
         except IOError as err:
             print("Arquivo não encontrado: [{}]".format(fileName))
@@ -73,6 +73,6 @@ while True:
             # Envia página de erro para o client
             for i in range(0,len(responseError)):
                 client.send(responseError[i].encode('utf-8'))
-                client.send('\n'.encode('utf-8'))
+            client.send('\n'.encode('utf-8'))
     # Fecha a conexão com o client
     client.close()
